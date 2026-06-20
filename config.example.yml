@@ -1,0 +1,22 @@
+mqtt:
+  host: 192.168.1.10       # MQTT broker address
+  port: 1883
+  username: mqtt_user      # optional
+  password: mqtt_pass      # optional
+  topic: envertech         # base MQTT topic (default: envertech)
+  ha_discovery: true       # publish Home Assistant discovery payloads (default: true)
+  ha_discovery_prefix: homeassistant  # HA discovery prefix (default: homeassistant)
+
+poll_interval: 30          # seconds between data fetches
+
+log_level: INFO            # DEBUG, INFO, WARNING, ERROR
+
+inverters:
+  - ip: 192.168.1.100
+    serial_number: ABCD1234   # 8-character hex serial number from the inverter label
+    name: "Roof South"        # optional display name (used in HA entity names)
+    port: 14889               # optional, default 14889
+
+  - ip: 192.168.1.101
+    serial_number: EFGH5678
+    name: "Roof West"

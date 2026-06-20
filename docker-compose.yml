@@ -1,0 +1,30 @@
+services:
+  envertech2mqtt:
+    image: ghcr.io/OWNER/pyenvertech2mqtt:latest
+    # build: .   # uncomment to build locally instead
+    restart: unless-stopped
+    # host networking is recommended for reliable connections to local inverters;
+    # bridge networking (the default) can cause the first poll to be delayed.
+    network_mode: host
+    environment:
+      # --- Single-inverter configuration via environment variables ---
+      INVERTER_IP: "192.168.1.100"
+      INVERTER_SN: "ABCD1234"
+      INVERTER_NAME: "My Inverter"   # optional
+
+      MQTT_HOST: "192.168.1.10"
+      MQTT_PORT: "1883"
+      # MQTT_USERNAME: "user"
+      # MQTT_PASSWORD: "pass"
+      MQTT_TOPIC: "envertech"
+
+      POLL_INTERVAL: "30"
+      HA_DISCOVERY: "true"
+      LOG_LEVEL: "INFO"
+
+    # --- Multi-inverter configuration via config file ---
+    # Comment out all the environment variables above and uncomment these:
+    # volumes:
+    #   - ./config.yml:/app/config.yml:ro
+    # environment:
+    #   CONFIG_FILE: "/app/config.yml"
